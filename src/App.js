@@ -35,6 +35,7 @@ class App extends React.Component {
 		this.setState({products: this.state.products})
 	}
 
+	
 	checkedItem(index){
 		this.state.products[index].check = !this.state.products[index].check
 		this.setState({products : this.state.products})
@@ -55,7 +56,7 @@ class App extends React.Component {
 					checkedItem = {this.checkedItem.bind(this)}
 				   />
 		})
-
+		
 		return (
 			<div>
 				<table>
