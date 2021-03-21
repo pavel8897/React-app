@@ -64,3 +64,8 @@ table tr td{
 .itemP.brown{
   background: brown;
 }
+
+.tableName{
+  margin: 20px auto;
+  display: table;
+}
