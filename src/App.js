@@ -1,50 +1,42 @@
 import React, { useReducer } from 'react';
 import {useState} from 'react';
-import Table from './Table';
-import Result from './Result';
+import Question from './Question';
 import './index.css';
 
 const App = () => {
-	const [users, setUsers] = useState([
-		{name: 'Ivan', fio: 'Ivanov', workDay: 17, pay: 320},
-		{name: 'Petya', fio: 'Petrov', workDay: 26, pay: 380},
-		{name: 'Kolya', fio: 'Sidorov', workDay: 93, pay: 490},
-		{name: 'Leha', fio: 'Pavlov', workDay: 119, pay: 790}
-	])
+	const [quest, setQuest] = useState([
+		{quest: 'Где производят автомобили Bugatti?', answer: 'Франция', option: '', flag: false},
+		{quest: 'Какая компания производит наибольшее количество шин в мире', answer: 'Лего', option: '', flag: false},
+		{quest: 'Где находится самая большая пустыня?', answer: 'Антарктида', option: '', flag: false}
+	])	
 
-	const changeDay = (e, index) => {
-		const newArr = users.slice();
-		newArr[index].workDay = Number(e.target.value);
-		setUsers(newArr);
+	const setOption = (e, index) => {
+		quest[index].option = e.target.value
+		setQuest(quest)
 	}
 
-	const changePay = (e, index) => {
-		const newArr = users.slice();
-		newArr[index].pay = Number(e.target.value);
-		setUsers(newArr);
+	const getOption = (index) => {
+		/*let option = document.querySelector('#option'+index)*/
+		quest[index].option == quest[index].answer ? quest[index].flag = true : quest[index].flag = false
+		setQuest(quest)
 	}
-	
-	const worker = users.map((user, index)=>{
-		return <Table 
-			name = {user.name}
-			fio = {user.fio}
-			workDay = {user.workDay}  
-			pay = {user.pay}
+
+	const work = quest.map((item, index)=>{
+		return <Question 
+			quest = {item.quest}
+			answer = {item.answer}
+			option = {item.option}
 			key = {index}
-			index = {index}
-			changeDay = {changeDay}
-			changePay = {changePay}
+			index = {index}	
+			getOption = {getOption}
+			setOption = {setOption}
+			flag = {item.flag}
 		/>
 	})
-
-	return (		
-		<div className="tableName">
-			<table>
-				<tbody>
-					{worker}
-				</tbody>
-			</table>
-			<Result users = {users} />
+	
+	return (
+		<div>
+			{work}
 		</div>
 	);
 }
